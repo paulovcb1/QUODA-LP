@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="script.js" ></script>
+
+</head>
+
+<body class="bg-black text-white font-sans">
+
+    <section class="text-center py-4">
+        <div class="max-w-md mx-auto px-4">
+            <h1 class="text-xl font-bold ">Viagens, milhas e cartões de crédito</h1>
+            <p class="border-t border-l border-gray-300 text-sm text-white-400 mt-2 p-2">Viagens mais baratas utilizando milhas aéreas geradas de forma
+                inteligente, com os gastos diários, <span class="font-bold">com ou sem cartão de crédito.</span></p>
+        </div>
+    </section>
+
+
+    <section class="bg-white text-black py-8">
+        <div class="max-w-md mx-auto px-4 ">
+            <div class="border-t border-black p-2"></div>
+            <img src="images/Analise-de-dados-financeiros.jpeg" alt="Gráfico" class="w-full h-auto rounded-lg mb-4">
+            <h2 class="text-2xl font-bold mb-4 text-center">Como funciona</h2>
+            <ul class="space-y-2 text-sm">
+                <li>1. Você conversa com nossa inteligência para entendermos seu perfil;</li>
+                <li>2. Compartilha se já tem planos ou não;</li>
+                <li>3. Nós oferecemos oportunidades e recomendamos os melhores programas de fidelidade.</li>
+            </ul>
+            <button class="mt-6 bg-gray-200 text-black py-2 px-6 rounded-full font-semibold block mx-auto">COMECE
+                AGORA</button>
+        </div>
+    </section>
+
+
+    <section class="py-8">
+        <div class="max-w-md mx-auto px-4 grid grid-cols-1 gap-4">
+            <div class="border-t border-white p-2"></div>
+            <div class="text-center">
+                <h3 class="text-lg font-semibold">Nós fazemos a gestão dos seus programas de fidelidade ou ensinamos
+                    você a tirar o melhor deles</h3>
+                <ul class="text-left list-disc ml-6 mt-4 space-y-2 text-sm">
+                    <li>Monitoramento;</li>
+                    <li>Dicas personalizadas;</li>
+                    <li>Oportunidades;</li>
+                </ul>
+                <p class="mt-4 text-sm">Você realiza seus sonhos de viagens gastando menos.</p>
+            </div>
+            <img src="images/predio.jpeg" alt="Imagem de prédios" class="w-full h-auto rounded-lg">
+        </div>
+    </section>
+
+
+    <section class="bg-white text-black py-8">
+        <div class="max-w-md mx-auto text-left px-4">
+            <div class="border-t border-black p-2"></div>
+            <form id="form" action="#" method="post">
+                <h4 class="text-lg font-bold mb-2">Vamos começar com seu WhatsApp:</h4>
+                <div class="border-b border-gray-300 py-4 px-3 mb-6 text-lg">
+                    <input id="telefone" name="telefone" class="border-0 outline-none w-[90%]" placeholder="(00) 0000-0000">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <button type="submit" class="bg-gray-900 text-white py-2 px-6 rounded-full">Enviar</button>
+            </form>
+            <p id="mensagem" ></p>
+        </div>
+    </section>
+
+
+    <footer class="text-center py-4 text-gray-400 text-sm">
+        <div class="max-w-md mx-auto">
+            <a href="#" class="underline">Segurança e Privacidade</a>
+            <div class="flex justify-center mt-4 space-x-4">
+                
+                <a href="#"><i class="fa-brands fa-facebook" class="w-10 h-10"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" class="w-10 h-10"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter" class="w-10 h-10"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
