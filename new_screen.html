@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+</head>
+<body class="flex flex-col">
+
+    <!-- Container principal do chat -->
+    <div class="bg-white w-full max-w-sm h-screen flex flex-col">
+        <!-- Cabeçalho do Chat -->
+        <div class="bg-blue-800 text-white py-3 px-4 rounded-t-lg flex items-center w-screen">
+            <img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full mr-2">
+            <h1 class="text-lg font-semibold">Chat Bot</h1>
+        </div>
+        
+        <!-- Área de mensagens -->
+        <div id="chat-messages" class="p-4 space-y-4 flex-1 overflow-y-auto w-screen">
+            <!-- Mensagem de exemplo do bot -->
+            <div class="flex items-start space-x-2">
+                <img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full">
+                <div class="bg-gray-200 text-gray-800 p-3 rounded-lg">
+                    <p>Olá! Me diga o nome de um coquetel e eu lhe darei informações sobre ele.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo de entrada -->
+        <div class="flex items-center p-3 border-t border-gray-300 bg-gray-300 w-screen">
+            <input id="user-input" type="text" placeholder="Escreva o nome de um coquetel..." class="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none">
+            <button id="send-button" class="ml-2 text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-9.193-5.33a.5.5 0 00-.76.427v10.47a.5.5 0 00.76.427l9.193-5.33a.5.5 0 000-.854z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+
+const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Função para adicionar uma mensagem ao chat
+        function addMessage(content, sender = 'bot') {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('flex', sender === 'user' ? 'justify-end' : 'items-start', 'space-x-2', 'mb-2');
+
+            messageElement.innerHTML = `
+                ${sender === 'bot' ? '<img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full">' : ''}
+                <div class="${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-xs">
+                    <p>${content}</p>
+                </div>
+                ${sender === 'user' ? '<img src="https://via.placeholder.com/24" alt="User Avatar" class="w-6 h-6 rounded-full">' : ''}
+            `;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Função para enviar mensagem para a API e exibir a resposta
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Adiciona a mensagem do usuário ao chat
+            addMessage(message, 'user');
+            userInput.value = '';
+
+            try {
+                // Faz uma requisição GET para a API do Cocktail Database com o nome do coquetel
+                const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(message)}`);
+                const data = await response.json();
+
+                // Verifica se há resultados para o coquetel
+                if (data.drinks) {
+                    const drink = data.drinks[0]; // Pegamos o primeiro resultado
+                    const drinkInfo = `
+                        <strong>${drink.strDrink}</strong><br>
+                        <em>${drink.strCategory}</em><br>
+                        <strong>Ingredientes:</strong><br>
+                        ${[drink.strIngredient1, drink.strIngredient2, drink.strIngredient3, drink.strIngredient4]
+                            .filter(ingredient => ingredient)
+                            .join(', ')}<br>
+                        <strong>Instruções:</strong> ${drink.strInstructions}
+                    `;
+                    addMessage(drinkInfo, 'bot');
+                } else {
+                    addMessage("Desculpe, não encontrei informações sobre esse coquetel.", 'bot');
+                }
+            } catch (error) {
+                console.error('Erro ao obter resposta do bot:', error);
+                addMessage('Desculpe, houve um problema ao se comunicar com o servidor.', 'bot');
+            }
+        }
+
+        // Envia a mensagem ao clicar no botão ou pressionar "Enter"
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+    </script>
+</body>
+</html>
