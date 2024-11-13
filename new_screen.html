@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
 </head>
@@ -12,16 +13,16 @@
 
     <div class="bg-white w-full max-w-sm h-screen flex flex-col">
         <!-- HEADER do Chat -->
-        <div class="bg-blue-800 text-white py-3 px-4 rounded-t-lg flex items-center w-screen">
-            <img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full mr-2">
+        <div class="bg-slate-900 text-white py-5 px-4 rounded-t-lg flex items-center w-screen gap-3">
+            <i class="fa-solid fa-arrow-left"></i>
             <h1 class="text-lg font-semibold">Chat Bot</h1>
         </div>
         
 
         <div id="chat-messages" class="p-4 space-y-4 flex-1 overflow-y-auto w-screen">
-<!-- respota do BOT -->
-            <div class="flex items-start space-x-2">
-                <img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full">
+        <!-- respota do BOT -->
+            <div class="flex items-start space-x-2 items-center">
+                <img src="bot.png" alt="Bot Avatar" class="w-10 h-10 rounded-full">
                 <div class="bg-gray-200 text-gray-800 p-3 rounded-lg">
                     <p>Olá! Me diga o nome de um coquetel e eu lhe darei informações sobre ele.</p>
                 </div>
@@ -29,12 +30,12 @@
         </div>
 
 <!-- INPUT -->
-        <div class="flex items-center p-3 border-t border-gray-300 bg-gray-300 w-screen">
+        <div class="flex items-center p-3 border-t border-gray-300 bg-gray-300 w-screen gap-3">
+            <i class="fa-solid fa-plus"></i>
             <input id="user-input" type="text" placeholder="Escreva o nome de um coquetel..." class="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none">
-            <button id="send-button" class="ml-2 text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-9.193-5.33a.5.5 0 00-.76.427v10.47a.5.5 0 00.76.427l9.193-5.33a.5.5 0 000-.854z" />
-                </svg>
+            <button id="send-button" class="flex items-center h-8 w-8 justify-center text-white rounded-full bg-slate-900">
+                <i class="fa-solid fa-paper-plane"></i>
+                
             </button>
         </div>
     </div>
@@ -51,11 +52,11 @@ const chatMessages = document.getElementById('chat-messages');
             messageElement.classList.add('flex', sender === 'user' ? 'justify-end' : 'items-start', 'space-x-2', 'mb-2');
 
             messageElement.innerHTML = `
-                ${sender === 'bot' ? '<img src="https://via.placeholder.com/24" alt="Bot Avatar" class="w-6 h-6 rounded-full">' : ''}
-                <div class="${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-xs">
+                ${sender === 'bot' ? '<img src="bot.png" alt="Bot Avatar" class="w-10 h-10 rounded-full">' : ''}
+                <div class="${sender === 'user' ? 'bg-slate-900 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-xs">
                     <p>${content}</p>
                 </div>
-                ${sender === 'user' ? '<img src="https://via.placeholder.com/24" alt="User Avatar" class="w-6 h-6 rounded-full">' : ''}
+                ${sender === 'user' ? '<img src="user.png" alt="User Avatar" class="w-10 h-10 rounded-full">' : ''}
             `;
             chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight;
